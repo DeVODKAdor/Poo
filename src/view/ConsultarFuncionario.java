@@ -21,9 +21,17 @@ public class ConsultarFuncionario extends JDialog {
 
         ArrayList<Funcionario> funcionarios = SistemaBiblioteca.consultarFuncionario();
         String texto = "";
-
+        int i = 1;
         for (Funcionario funcionario : funcionarios) {
-            texto += ((funcionario.getCpf() + " | " + funcionario.getNome() + " | " + funcionario.getEmail() + " | " + funcionario.getCargo().getNome() + " | " + funcionario.getSalario() + "\n"));
+
+            if (i == 1) {
+                texto += ((funcionario.getCpf() + " | " + funcionario.getNome() + " | " + funcionario.getEmail() + " | " + "Cargo" + " | " + funcionario.getSalario() + "\n"));
+
+            } else {
+                texto += ((funcionario.getCpf() + " | " + funcionario.getNome() + " | " + funcionario.getEmail() + " | " + funcionario.getCargo().getNome() + " | " + funcionario.getSalario() + "\n"));
+
+            }
+            i++;
         }
 
         funcionariosDisplay.setText(texto);
