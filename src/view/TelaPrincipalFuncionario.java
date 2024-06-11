@@ -71,5 +71,17 @@ public class TelaPrincipalFuncionario extends JFrame {
                 new ConsultarCargo().setVisible(true);
             }
         });
+        adicionarFuncionárioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new AdicionarFuncionario().setVisible(true);
+            }
+        });
+        consultarFuncionáriosButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ConsultarFuncionario().setVisible(true);
+            }
+        });
     }
 }

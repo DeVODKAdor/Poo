@@ -81,4 +81,20 @@ public class SistemaBiblioteca {
         }
         return cargos;
     }
+
+    public static void adicionarFuncionario(Funcionario funcionario) {
+        String linha = funcionario.getCpf() + "," + funcionario.getNome() + "," + funcionario.getEmail() + "," + funcionario.getCargo().getNome() + "," + funcionario.getSalario();
+        Util.escritor("src\\funcionarios.csv", linha);
+    }
+
+    public static ArrayList<Funcionario> consultarFuncionario() {
+        ArrayList<String[]> linhas = Util.leitor("src\\funcionarios.csv");
+        ArrayList<Funcionario> funcionarios = new ArrayList<>();
+        for (String[] linha : linhas) {
+            Cargo cargo = Util.buscarCargo(linha[3]);
+            Funcionario funcionario = new Funcionario(linha[0], linha[1], linha[2], cargo, linha[4]);
+            funcionarios.add(funcionario);
+        }
+        return funcionarios;
+    }
 }

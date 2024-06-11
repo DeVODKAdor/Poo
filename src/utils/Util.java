@@ -1,5 +1,7 @@
 package utils;
 
+import model.Cargo;
+import model.SistemaBiblioteca;
 import view.TelaPrincipalFuncionario;
 
 import java.io.*;
@@ -40,5 +42,15 @@ public class Util {
             throw new RuntimeException(e);
         }
 
+    }
+
+    public static Cargo buscarCargo(String nomeCargo) {
+        ArrayList<Cargo> cargos = SistemaBiblioteca.consultarCargo();
+        for (Cargo cargo : cargos) {
+            if (cargo.getNome().equals(nomeCargo)) {
+                return cargo;
+            }
+        }
+        return null;
     }
 }

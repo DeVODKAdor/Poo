@@ -2,16 +2,16 @@ package model;
 
 public class Funcionario extends Usuario {
     private final Cargo cargo;
-    private final double salario;
+    private final String salario;
 
-    public Funcionario(String cpf, String nome, String email, Cargo cargo, double salario) {
+    public Funcionario(String cpf, String nome, String email, Cargo cargo, String salario) {
         super(cpf, nome, email);
         this.cargo = cargo;
         this.salario = salario;
     }
 
     public Cargo getCargo() { return cargo; }
-    public double getSalario() { return salario; }
+    public String getSalario() { return salario; }
 
     @Override
     public String getDescricao() {
