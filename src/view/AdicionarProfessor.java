@@ -1,33 +1,27 @@
 package view;
 
-import model.Livro;
+import model.Professor;
 import model.SistemaBiblioteca;
 
 import javax.swing.*;
 import java.awt.event.*;
-import java.util.ArrayList;
+import java.util.Random;
 
-public class ConsultarLivro extends JDialog {
+public class AdicionarProfessor extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JTextArea livrosDisplay;
+    private JTextField cpfProfessor;
+    private JTextField nomeProfessor;
+    private JTextField emailProfessor;
+    private JTextField titulacaoProfessor;
+    private JLabel aviso;
 
-    public ConsultarLivro() {
+    public AdicionarProfessor() {
         setContentPane(contentPane);
         setModal(true);
         setSize(600, 600);
         getRootPane().setDefaultButton(buttonOK);
-
-
-        ArrayList<Livro> livros = SistemaBiblioteca.consultarAcervo();
-
-        String texto = "";
-        for (Livro livro : livros) {
-            texto += ((livro.getTitulo() + " | " + livro.getAutores() + " | " + livro.getEditora() + " | " + livro.getAnoPublicacao() + " | " + livro.getNumeroPaginas() + " | " + livro.getIsbn() + " | " + livro.getGenero() + " | " + livro.getSinopse() + " | " + livro.getIdioma() + "\n"));
-
-        }
-        livrosDisplay.setText(texto);
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -58,8 +52,18 @@ public class ConsultarLivro extends JDialog {
     }
 
     private void onOK() {
-        // add your code here
-        dispose();
+        if(titulacaoProfessor.getText().isBlank() || cpfProfessor.getText().isBlank() || emailProfessor.getText().isBlank() || nomeProfessor.getText().isBlank()) {
+            aviso.setVisible(true);
+        } else {
+            Random rand = new Random();
+            int numero = rand.nextInt(9000) + 1000; // Gera um número entre 1000 e 9999
+            String senha = String.valueOf(numero);
+            Professor professor = new Professor(cpfProfessor.getText(), nomeProfessor.getText(), emailProfessor.getText(), titulacaoProfessor.getText(), senha);
+            SistemaBiblioteca.adicionarProfessor(professor);
+            JOptionPane.showInputDialog("Sua senha é: " + professor.getSenha());
+            dispose();
+        }
+
     }
 
     private void onCancel() {
@@ -68,7 +72,7 @@ public class ConsultarLivro extends JDialog {
     }
 
     public static void main(String[] args) {
-        ConsultarLivro dialog = new ConsultarLivro();
+        AdicionarProfessor dialog = new AdicionarProfessor();
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);

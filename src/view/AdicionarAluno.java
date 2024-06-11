@@ -1,33 +1,28 @@
 package view;
 
-import model.Livro;
+import model.Aluno;
 import model.SistemaBiblioteca;
 
 import javax.swing.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 
-public class ConsultarLivro extends JDialog {
+public class AdicionarAluno extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JTextArea livrosDisplay;
+    private JTextField cpfAluno;
+    private JTextField nomeAluno;
+    private JTextField emailAluno;
+    private JTextField insituicaoAluno;
+    private JTextField cursoAluno;
+    private JTextField notaEnemAluno;
+    private JLabel aviso;
 
-    public ConsultarLivro() {
+    public AdicionarAluno() {
         setContentPane(contentPane);
         setModal(true);
         setSize(600, 600);
         getRootPane().setDefaultButton(buttonOK);
-
-
-        ArrayList<Livro> livros = SistemaBiblioteca.consultarAcervo();
-
-        String texto = "";
-        for (Livro livro : livros) {
-            texto += ((livro.getTitulo() + " | " + livro.getAutores() + " | " + livro.getEditora() + " | " + livro.getAnoPublicacao() + " | " + livro.getNumeroPaginas() + " | " + livro.getIsbn() + " | " + livro.getGenero() + " | " + livro.getSinopse() + " | " + livro.getIdioma() + "\n"));
-
-        }
-        livrosDisplay.setText(texto);
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -58,7 +53,12 @@ public class ConsultarLivro extends JDialog {
     }
 
     private void onOK() {
-        // add your code here
+        if (cpfAluno.getText().isBlank() || nomeAluno.getText().isBlank() || emailAluno.getText().isBlank() || insituicaoAluno.getText().isBlank() || cursoAluno.getText().isBlank() || notaEnemAluno.getText().isBlank()) {
+            aviso.setVisible(true);
+        } else {
+            Aluno aluno = new Aluno(cpfAluno.getText(), nomeAluno.getText(), emailAluno.getText(), insituicaoAluno.getText(), cursoAluno.getText(), notaEnemAluno.getText());
+            SistemaBiblioteca.adicionarAluno(aluno);
+        }
         dispose();
     }
 
@@ -68,7 +68,7 @@ public class ConsultarLivro extends JDialog {
     }
 
     public static void main(String[] args) {
-        ConsultarLivro dialog = new ConsultarLivro();
+        AdicionarAluno dialog = new AdicionarAluno();
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);

@@ -1,33 +1,26 @@
 package view;
 
-import model.Livro;
+import model.Professor;
 import model.SistemaBiblioteca;
 
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
-public class ConsultarLivro extends JDialog {
+public class LoginProfessor extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JTextArea livrosDisplay;
+    private JTextField cpfProfessor;
+    private JPasswordField senhaProfessor;
+    private JLabel aviso;
 
-    public ConsultarLivro() {
+    public LoginProfessor() {
         setContentPane(contentPane);
         setModal(true);
         setSize(600, 600);
         getRootPane().setDefaultButton(buttonOK);
-
-
-        ArrayList<Livro> livros = SistemaBiblioteca.consultarAcervo();
-
-        String texto = "";
-        for (Livro livro : livros) {
-            texto += ((livro.getTitulo() + " | " + livro.getAutores() + " | " + livro.getEditora() + " | " + livro.getAnoPublicacao() + " | " + livro.getNumeroPaginas() + " | " + livro.getIsbn() + " | " + livro.getGenero() + " | " + livro.getSinopse() + " | " + livro.getIdioma() + "\n"));
-
-        }
-        livrosDisplay.setText(texto);
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -58,8 +51,20 @@ public class ConsultarLivro extends JDialog {
     }
 
     private void onOK() {
-        // add your code here
-        dispose();
+        if (cpfProfessor.getText().isBlank() || senhaProfessor.getPassword().length == 0) {
+            aviso.setText("Um campo está vazio.");
+        }
+        ArrayList<Professor> professores = SistemaBiblioteca.consultarProfessor();
+        for (Professor professor : professores) {
+            if (professor.getCpf().equals(cpfProfessor.getText()) && Arrays.equals(professor.getSenha().toCharArray(), senhaProfessor.getPassword())) {
+                dispose();
+                new ConsultarLivro().setVisible(true);
+            }
+        }
+        cpfProfessor.setText("");
+        senhaProfessor.setText("");
+        aviso.setText("Um campo está errado.");
+
     }
 
     private void onCancel() {
@@ -68,7 +73,7 @@ public class ConsultarLivro extends JDialog {
     }
 
     public static void main(String[] args) {
-        ConsultarLivro dialog = new ConsultarLivro();
+        LoginProfessor dialog = new LoginProfessor();
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);

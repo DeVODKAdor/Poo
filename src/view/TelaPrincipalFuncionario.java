@@ -29,5 +29,47 @@ public class TelaPrincipalFuncionario extends JFrame {
                 new AdicionarLivro().setVisible(true);
             }
         });
+        consultarLivrosButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ConsultarLivro().setVisible(true);
+            }
+        });
+        adicionarProfessorButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new AdicionarProfessor().setVisible(true);
+            }
+        });
+        consultarProfessoresButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ConsultarProfessor().setVisible(true);
+            }
+        });
+        adicionarAlunoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new AdicionarAluno().setVisible(true);
+            }
+        });
+        consultarAlunosButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ConsultarAluno().setVisible(true);
+            }
+        });
+        adicionarCargoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new AdicionarCargo().setVisible(true);
+            }
+        });
+        consultarCargosButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ConsultarCargo().setVisible(true);
+            }
+        });
     }
 }

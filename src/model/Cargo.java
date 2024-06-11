@@ -1,20 +1,20 @@
 package model;
 
 public class Cargo {
-    private final int codigo;
+    private final String codigo;
     private final String nome;
     private final String descricao;
-    private final int cargaHoraria;
+    private final String cargaHoraria;
 
-    public Cargo(int codigo, String nome, String descricao, int cargaHoraria) {
+    public Cargo(String codigo, String nome, String descricao, String cargaHoraria) {
         this.codigo = codigo;
         this.nome = nome;
         this.descricao = descricao;
         this.cargaHoraria = cargaHoraria;
     }
 
-    public int getCodigo() { return codigo; }
+    public String getCodigo() { return codigo; }
     public String getNome() { return nome; }
     public String getDescricao() { return descricao; }
-    public int getCargaHoraria() { return cargaHoraria; }
+    public String getCargaHoraria() { return cargaHoraria; }
 }

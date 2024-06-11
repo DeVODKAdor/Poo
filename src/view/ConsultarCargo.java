@@ -1,33 +1,32 @@
 package view;
 
-import model.Livro;
+import model.Cargo;
 import model.SistemaBiblioteca;
 
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-public class ConsultarLivro extends JDialog {
+public class ConsultarCargo extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JTextArea livrosDisplay;
+    private JTextArea cargosDisplay;
 
-    public ConsultarLivro() {
+    public ConsultarCargo() {
         setContentPane(contentPane);
         setModal(true);
         setSize(600, 600);
         getRootPane().setDefaultButton(buttonOK);
 
-
-        ArrayList<Livro> livros = SistemaBiblioteca.consultarAcervo();
-
+        ArrayList<Cargo> cargos = SistemaBiblioteca.consultarCargo();
         String texto = "";
-        for (Livro livro : livros) {
-            texto += ((livro.getTitulo() + " | " + livro.getAutores() + " | " + livro.getEditora() + " | " + livro.getAnoPublicacao() + " | " + livro.getNumeroPaginas() + " | " + livro.getIsbn() + " | " + livro.getGenero() + " | " + livro.getSinopse() + " | " + livro.getIdioma() + "\n"));
 
+        for (Cargo cargo : cargos) {
+            texto += ((cargo.getCodigo() + " | " + cargo.getNome() + " | " + cargo.getDescricao() + " | " + cargo.getCargaHoraria() + "\n"));
         }
-        livrosDisplay.setText(texto);
+
+        cargosDisplay.setText(texto);
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -68,7 +67,7 @@ public class ConsultarLivro extends JDialog {
     }
 
     public static void main(String[] args) {
-        ConsultarLivro dialog = new ConsultarLivro();
+        ConsultarCargo dialog = new ConsultarCargo();
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);

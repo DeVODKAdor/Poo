@@ -1,33 +1,26 @@
 package view;
 
-import model.Livro;
+import model.Cargo;
 import model.SistemaBiblioteca;
 
 import javax.swing.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 
-public class ConsultarLivro extends JDialog {
+public class AdicionarCargo extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JTextArea livrosDisplay;
+    private JTextField codigoCargo;
+    private JTextField nomeCargo;
+    private JTextField descricaoCargo;
+    private JTextField cargaHorariaCargo;
+    private JLabel aviso;
 
-    public ConsultarLivro() {
+    public AdicionarCargo() {
         setContentPane(contentPane);
         setModal(true);
         setSize(600, 600);
         getRootPane().setDefaultButton(buttonOK);
-
-
-        ArrayList<Livro> livros = SistemaBiblioteca.consultarAcervo();
-
-        String texto = "";
-        for (Livro livro : livros) {
-            texto += ((livro.getTitulo() + " | " + livro.getAutores() + " | " + livro.getEditora() + " | " + livro.getAnoPublicacao() + " | " + livro.getNumeroPaginas() + " | " + livro.getIsbn() + " | " + livro.getGenero() + " | " + livro.getSinopse() + " | " + livro.getIdioma() + "\n"));
-
-        }
-        livrosDisplay.setText(texto);
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -58,8 +51,14 @@ public class ConsultarLivro extends JDialog {
     }
 
     private void onOK() {
-        // add your code here
-        dispose();
+        if (codigoCargo.getText().isBlank() || nomeCargo.getText().isBlank() || descricaoCargo.getText().isBlank() || cargaHorariaCargo.getText().isBlank()) {
+            aviso.setVisible(true);
+        } else {
+            Cargo cargo = new Cargo(codigoCargo.getText(), nomeCargo.getText(), descricaoCargo.getText(), cargaHorariaCargo.getText());
+            SistemaBiblioteca.adicionarCargo(cargo);
+            dispose();
+        }
+
     }
 
     private void onCancel() {
@@ -68,7 +67,7 @@ public class ConsultarLivro extends JDialog {
     }
 
     public static void main(String[] args) {
-        ConsultarLivro dialog = new ConsultarLivro();
+        AdicionarCargo dialog = new AdicionarCargo();
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);

@@ -3,9 +3,9 @@ package model;
 public class Aluno extends Usuario {
     private final String instituicaoDeEnsino;
     private final String curso;
-    private final float notaENEM;
+    private final String notaENEM;
 
-    public Aluno(String cpf, String nome, String email, String instituicaoDeEnsino, String curso, float notaENEM) {
+    public Aluno(String cpf, String nome, String email, String instituicaoDeEnsino, String curso, String notaENEM) {
         super(cpf, nome, email);
         this.instituicaoDeEnsino = instituicaoDeEnsino;
         this.curso = curso;
@@ -14,7 +14,7 @@ public class Aluno extends Usuario {
 
     public String getInstituicaoDeEnsino() { return instituicaoDeEnsino; }
     public String getCurso() { return curso; }
-    public float getNotaENEM() { return notaENEM; }
+    public String getNotaENEM() { return notaENEM; }
 
     @Override
     public String getDescricao() {

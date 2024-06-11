@@ -23,6 +23,12 @@ public class TelaInicial extends JFrame {
                 tela.setVisible(true);
             }
         });
+        professorButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new LoginProfessor().setVisible(true);
+            }
+        });
     }
 
 }
